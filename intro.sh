@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x #debug mode et permet de marquer le debut de chaque commande
+set -x # Active le mode debug et affiche chaque commande avant son exécution
 df -h
 free -g
 nproc
