@@ -1,3 +1,40 @@
+#!/bin/bash
+
+# GitHub API URL
+API_URL="https://api.github.com"
+
+# GitHub username and personal access token
+# `username` is the GitHub username, and `token` is the personal access token created in your GitHub account.
+# These are sensitive credentials used to identify you on GitHub, so export them in your terminal before executing this script.
+# Example:
+# export username="your-username"
+# export token="your-token"
+
+# Retrieve username and token from environment variables
+USERNAME=$username  # Ensure this is exported in the terminal before running the script
+TOKEN=$token        # Ensure this is exported in the terminal before running the script
+
+# Check if username and token are set
+if [[ -z "$USERNAME" || -z "$TOKEN" ]]; then
+  echo "Error: Username and/or token are not set. Please export them as environment variables before running the script."
+  echo "Example: export username='your-username' && export token='your-token'"
+  exit 1
+fi
+
+# User and Repository information
+# This script expects two parameters during execution:
+# 1. The GitHub organization or owner name
+# 2. The repository name
+REPO_OWNER=$1
+REPO_NAME=$2
+
+# Validate input arguments
+if [[ -z "$REPO_OWNER" || -z "$REPO_NAME" ]]; then
+  echo "Error: Missing required arguments."
+  echo "Usage: $0 <repo-owner> <repo-name>"
+  exit 1
+fi
+
 # Function to make a GET request to the GitHub API
 function github_api_get {
   local endpoint="$1"
